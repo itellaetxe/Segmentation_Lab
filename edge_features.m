@@ -1,18 +1,19 @@
-function [contourSig] = edge_features(im)
+function [contourSig, xlocs, ylocs] = edge_features(im)
 % EDGE_FEATURES: gives you the contour signature of the image, xlocs and
 % ylocs. Follows contour in order. 
 % INPUT IMAGE ALREADY WITH BLACK BCKG.
 
 % Edge mask (boundaries)
-[~, dROI] = segment_element(im);
+[ROI, ~] = segment_element(im);
 % Centroid
-centroid = regionprops(dROI, 'Centroid');
+centroid = regionprops(ROI, 'Centroid');
 
 %%% BWBOUNDARIES IMPLEMENTATION
-[points, ~] = bwboundaries(dROI);
+[points, ~] = bwboundaries(ROI);
 points = points{1};
 contourSig = sqrt((points(:,1)-centroid.Centroid(:,1)).^2 + (points(:,2)-centroid.Centroid(:,2)).^2);
 
+ylocs = points(:,1); xlocs = points(:,2);
 
 %%% MY IMPLEMENTATION, DID NOT WORK WELL
 % canv_n = dROI;
