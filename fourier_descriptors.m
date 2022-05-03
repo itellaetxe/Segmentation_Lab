@@ -23,6 +23,6 @@ for cI = 1:N/2-1
     s_2 = abs(Zn(cI+1)) + abs(Zn(end-cI+1)) + s_2;
 end
 
-ff = 1 - (s_1/s_2);
 
+ff = 1 - (s_1/s_2);
 end
